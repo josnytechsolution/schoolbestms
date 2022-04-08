@@ -20,4 +20,9 @@ class CurrentSession extends Model
     {
         return $query->where('status', 'Active');
     }
+
+    public function audit_trails()
+    {
+        return $this->hasMany(AuditTrail::class);
+    }
 }
