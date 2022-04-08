@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\CompanyProfile;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class CompanyProfileController extends Controller
 {
@@ -20,11 +21,12 @@ class CompanyProfileController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return void
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function index()
     {
-        //
+        $this->authorize('viewAny', CompanyProfile::class);
     }
 
     /**

@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\CurrentSession;
 use App\User;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
@@ -29,7 +30,11 @@ class RouteServiceProvider extends ServiceProvider
         parent::boot();
 
         Route::bind('system_user', function ($slug) {
-          return User::where('slug')->first();
+          return User::where('slug', $slug)->first();
+        });
+
+        Route::bind('financial_session', function ($slug) {
+          return CurrentSession::where('slug', $slug)->first();
         });
     }
 

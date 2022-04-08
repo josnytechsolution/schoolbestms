@@ -21,11 +21,15 @@ class SystemUserController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return void
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function index()
     {
-        //
+        $this->authorize('viewAny', User::class);
+
+        $users = User::all();
+        return view('admin.settings.system_users', compact('users'));
     }
 
     /**

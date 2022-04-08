@@ -118,8 +118,8 @@
                                     <tr>
                                         <th>#</th>
                                         <th>SESSION</th>
-                                        <th>YEAR</th>
                                         <th>TERM</th>
+                                        <th>YEAR</th>
                                         <th>STATUS</th>
                                         <th>EDIT</th>
                                         <th>DELETE</th>
@@ -156,123 +156,123 @@
                                                     </a>
                                                 @endif
                                             </td>
+                                            <!-- Start Edit Modal -->
+                                            <div class="modal fade" id="editFSess{{ $financial_session->slug }}" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+
+                                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                                    <div class="modal-content no-radius">
+                                                        <form action="{{ route('financial-sessions.update', $financial_session->slug) }}" method="POST">
+                                                            @csrf
+                                                            @method('PUT')
+
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="exampleModalCenterTitle"><i class="fa fa-edit text-success"></i> Edit Session {{ strtoupper($financial_session->name) }}</h5>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <div class="row">
+                                                                    <div class="form-group col-md-12 mt-2">
+                                                                        <label>Session Name <sup class="text-danger">required</sup></label>
+                                                                        <input type="text" name="name" class="form-control form-control-border @error('name') is-invalid @enderror no-radius" placeholder="Session Name" value="{{ old('name', $financial_session->name) }}" >
+
+                                                                        @if($errors->has('name'))
+                                                                            <small class="text-danger">{{ $errors->first('name') }}</small>
+                                                                        @endif
+                                                                    </div>
+                                                                    <div class="form-group col-md-12 mt-2">
+                                                                        <label>Academic Term <sup class="text-danger">required</sup></label>
+                                                                        <select name="term" class="form-control form-control-border @error('term') is-invalid @enderror no-radius">
+                                                                            <option value="{{ $financial_session->term }}">{{ $financial_session->term }}</option>
+                                                                            <option value="TERM 1">TERM 1</option>
+                                                                            <option value="TERM 2">TERM 2</option>
+                                                                            <option value="TERM 3">TERM 3</option>
+                                                                        </select>
+                                                                        @if($errors->has('term'))
+                                                                            <small class="text-danger">{{ $errors->first('term') }}</small>
+                                                                        @endif
+                                                                    </div>
+
+                                                                    <div class="form-group col-md-12">
+                                                                        <label>Financial Year <sup class="text-danger">required</sup></label>
+                                                                        <select name="year" class="form-control form-control-border @error('year') is-invalid @enderror no-radius">
+                                                                            <option value="{{ $financial_session->year }}">{{ $financial_session->year }}</option>
+                                                                            <option value="2022">2022</option>
+                                                                            <option value="2023">2023</option>
+                                                                            <option value="2024">2024</option>
+                                                                            <option value="2025">2025</option>
+                                                                            <option value="2026">2026</option>
+                                                                            <option value="2027">2027</option>
+                                                                            <option value="2028">2028</option>
+                                                                            <option value="2029">2029</option>
+                                                                            <option value="2030">2030</option>
+                                                                        </select>
+                                                                        @if($errors->has('year'))
+                                                                            <small class="text-danger">{{ $errors->first('year') }}</small>
+                                                                        @endif
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary btn-flat float-left" data-dismiss="modal"><i class="fa fa-times"></i> Cancel</button>
+                                                                <button type="submit" class="btn btn-success btn-flat"><i class="fa fa-save"></i> Save Changes</button>
+                                                            </div>
+                                                        </form>
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <!-- End Edit Modal -->
+
+                                            <!-- Start Delete Modal -->
+                                            <div class="modal fade" id="deleteFSess{{ $financial_session->slug }}" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+
+                                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                                    <div class="modal-content no-radius">
+                                                        <form action="{{ route('financial-sessions.destroy', $financial_session->slug) }}" method="post">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="exampleModalCenterTitle"><i class="fa fa-trash text-danger"></i> Delete Class: {{ strtoupper($financial_session->name) }}</h5>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body text-sm">
+                                                                <div class="col-md-12 mb-3">
+                                                                    <div class="alert alert-warning" style="text-align: center">
+                                                                        <i class="fa fa-exclamation-triangle fa-2x"></i><br>
+                                                                        This action cannot be undone.<br>
+                                                                        This will delete all information related to this class.<br>
+                                                                        Are you you want to delete<br> {{ strtoupper($financial_session->name) }}?
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col-md-12 mb-3">
+                                                                    <label>Enter Administrator Password<span class="text-danger"><sup>*</sup></span> </label>
+                                                                    <input type="password" name="password" class="form-control no-radius @error('password') is-invalid @enderror" required>
+                                                                    <small>This action requires Admin rights</small>
+                                                                    @if($errors->has('password'))
+                                                                        <p style="font-family:courier new;color:red;font-size:12px">
+                                                                            {{ $errors->first('password') }}
+                                                                        </p>
+                                                                    @endif
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary btn-flat float-left" data-dismiss="modal"><i class="fa fa-times"></i> No! Cancel</button>
+                                                                <button type="submit" class="btn btn-danger btn-flat"><i class="fa fa-save"></i> Yes! Delete Session</button>
+                                                            </div>
+                                                        </form>
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <!-- End Delete Modal -->
                                         </tr>
-
-                                        <!-- Start Edit Modal -->
-                                        <div class="modal fade" id="editFSess{{ $financial_session->slug }}" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
-
-                                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                                <div class="modal-content no-radius">
-                                                    <form action="{{ route('financial-sessions.update', $financial_session->slug) }}" method="post">
-                                                        @csrf
-                                                        @method('PUT')
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title" id="exampleModalCenterTitle"><i class="fa fa-edit text-success"></i> Edit Session {{ strtoupper($financial_session->name) }}</h5>
-                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                <span aria-hidden="true">&times;</span>
-                                                            </button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <div class="row">
-                                                                <div class="form-group col-md-12 mt-2">
-                                                                    <label>Session Name <sup class="text-danger">required</sup></label>
-                                                                    <input type="text" name="name" class="form-control form-control-border @error('name') is-invalid @enderror no-radius" placeholder="Session Name" value="{{ old('name', $financial_session->name) }}" >
-
-                                                                    @if($errors->has('name'))
-                                                                        <small class="text-danger">{{ $errors->first('name') }}</small>
-                                                                    @endif
-                                                                </div>
-                                                                <div class="form-group col-md-12 mt-2">
-                                                                    <label>Academic Term</label>
-                                                                    <select name="term" class="form-control form-control-border @error('term') is-invalid @enderror no-radius">
-                                                                        <option value="{{ $financial_session->name }}">{{ $financial_session->term }}</option>
-                                                                        <option value="TERM 1">TERM 1</option>
-                                                                        <option value="TERM 2">TERM 2</option>
-                                                                        <option value="TERM 3">TERM 3</option>
-                                                                    </select>
-                                                                    @if($errors->has('term'))
-                                                                        <small class="text-danger">{{ $errors->first('term') }}</small>
-                                                                    @endif
-                                                                </div>
-
-                                                                <div class="form-group col-md-12">
-                                                                    <label>Fianacial Year</label>
-                                                                    <select name="year" class="form-control form-control-border @error('year') is-invalid @enderror no-radius">
-                                                                        <option value="{{ $financial_session->year }}">{{ $financial_session->year }}</option>
-                                                                        <option value="2022">2022</option>
-                                                                        <option value="2023">2023</option>
-                                                                        <option value="2024">2024</option>
-                                                                        <option value="2025">2025</option>
-                                                                        <option value="2026">2026</option>
-                                                                        <option value="2027">2027</option>
-                                                                        <option value="2028">2028</option>
-                                                                        <option value="2029">2029</option>
-                                                                        <option value="2030">2030</option>
-                                                                    </select>
-                                                                    @if($errors->has('year'))
-                                                                        <small class="text-danger">{{ $errors->first('year') }}</small>
-                                                                    @endif
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary btn-flat float-left" data-dismiss="modal"><i class="fa fa-times"></i> Cancel</button>
-                                                            <button type="submit" class="btn btn-success btn-flat"><i class="fa fa-save"></i> Save Changes</button>
-                                                        </div>
-                                                    </form>
-
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                        <!-- End Edit Modal -->
-
-                                        <!-- Start Delete Modal -->
-                                        <div class="modal fade" id="deleteFSess{{ $financial_session->slug }}" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
-
-                                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                                <div class="modal-content no-radius">
-                                                    <form action="{{ route('financial-sessions.destroy', $financial_session->slug) }}" method="post">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title" id="exampleModalCenterTitle"><i class="fa fa-trash text-danger"></i> Delete Class: {{ strtoupper($financial_session->name) }}</h5>
-                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                <span aria-hidden="true">&times;</span>
-                                                            </button>
-                                                        </div>
-                                                        <div class="modal-body text-sm">
-                                                            <div class="col-md-12 mb-3">
-                                                                <div class="alert alert-warning" style="text-align: center">
-                                                                    <i class="fa fa-exclamation-triangle fa-2x"></i><br>
-                                                                    This action cannot be undone.<br>
-                                                                    This will delete all information related to this class.<br>
-                                                                    Are you you want to delete<br> {{ strtoupper($financial_session->name) }}?
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="col-md-12 mb-3">
-                                                                <label>Enter Administrator Password<span class="text-danger"><sup>*</sup></span> </label>
-                                                                <input type="password" name="password" class="form-control no-radius @error('password') is-invalid @enderror" required>
-                                                                <small>This action requires Admin rights</small>
-                                                                @if($errors->has('password'))
-                                                                    <p style="font-family:courier new;color:red;font-size:12px">
-                                                                        {{ $errors->first('password') }}
-                                                                    </p>
-                                                                @endif
-                                                            </div>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary btn-flat float-left" data-dismiss="modal"><i class="fa fa-times"></i> No! Cancel</button>
-                                                            <button type="submit" class="btn btn-danger btn-flat"><i class="fa fa-save"></i> Yes! Delete Session</button>
-                                                        </div>
-                                                    </form>
-
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                        <!-- End Delete Modal -->
 
                                         <?php $i++; ?>
                                     @endforeach
