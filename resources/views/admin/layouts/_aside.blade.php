@@ -21,7 +21,7 @@
                 </li>
 
                 <li class="nav-item mt-2">
-                    <a href="" class="nav-link">
+                    <a href="{{ route('my-clients.index') }}" class="nav-link">
                         <i class="nav-icon fas fa-users"></i>
                         <p>
                             CLIENTS

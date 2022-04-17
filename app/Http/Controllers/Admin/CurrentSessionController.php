@@ -23,7 +23,7 @@ class CurrentSessionController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('admin');
+        $this->middleware('super');
     }
 
     private function CurrentSession()
@@ -82,7 +82,6 @@ class CurrentSessionController extends Controller
         $data->save();
 
         DB::table('audit_trails')->insert(['user_type' => 'App\User', 'user_id' => Auth::user()->id,  'current_session_id' => $this->CurrentSession(), 'event' => 'created', 'auditable_type' => 'App\CurrentSession', 'new_values' => json_encode($data->toArray()), 'url' => URL::full(), 'ip_address' => $_SERVER["REMOTE_ADDR"], 'user_agent' => $_SERVER['HTTP_USER_AGENT']]);
-
 
         return redirect()->back()->with('success', 'Session has been created successfully!');
     }

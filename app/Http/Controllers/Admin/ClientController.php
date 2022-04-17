@@ -2,44 +2,52 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\User;
+use App\Client;
+use App\CurrentSession;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class SystemUserController extends Controller
-{
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
+class ClientController extends Controller
+{ /**
+ * Create a new controller instance.
+ *
+ * @return void
+ */
     public function __construct()
     {
         $this->middleware('admin');
     }
 
+    private function CurrentSession()
+    {
+        $current_session = CurrentSession::Current()->first();
+        return $current_session->id;
+    }
+
     /**
      * Display a listing of the resource.
      *
-     * @return void
+     * @return \Illuminate\Http\Response
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function index()
     {
-        $this->authorize('viewAny', User::class);
+        $this->authorize('viewAny', Client::class);
 
-        $users = User::all();
-        return view('admin.settings.system_users', compact('users'));
+        $clients = Client::all();
+        return view('admin.clients.clients_list', compact('clients'));
     }
 
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function create()
     {
-        //
+        $this->authorize('create', Client::class);
+        return view('admin.clients.create_client');
     }
 
     /**
@@ -56,10 +64,10 @@ class SystemUserController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\User  $user
+     * @param  \App\Client  $client
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show(Client $client)
     {
         //
     }
@@ -67,10 +75,10 @@ class SystemUserController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\User  $user
+     * @param  \App\Client  $client
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit(Client $client)
     {
         //
     }
@@ -79,10 +87,10 @@ class SystemUserController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\User  $user
+     * @param  \App\Client  $client
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, Client $client)
     {
         //
     }
@@ -90,10 +98,10 @@ class SystemUserController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\User  $user
+     * @param  \App\Client  $client
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy(Client $client)
     {
         //
     }

@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Client;
 use App\CurrentSession;
 use App\User;
 use Illuminate\Support\Facades\Route;
@@ -35,6 +36,10 @@ class RouteServiceProvider extends ServiceProvider
 
         Route::bind('financial_session', function ($slug) {
           return CurrentSession::where('slug', $slug)->first();
+        });
+
+        Route::bind('my_client', function ($slug) {
+           return Client::where('slug', $slug)->first();
         });
     }
 

@@ -23,9 +23,10 @@ Route::get('/home', 'HomeController@index')->name('home')->middleware('verified'
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function() {
     Route::get('/dashboard-v1/', 'Admin\DashboardController@index')->name('adminDashboard');
     Route::resource('/company-profile', 'Admin\CompanyProfileController');
-    Route::resource('/system-users', 'Admin\SystemUserController');
+    Route::resource('/system-users', 'Admin\UserController');
     Route::resource('/financial-sessions', 'Admin\CurrentSessionController');
     Route::resource('/audit-trails', 'Admin\AuditTrailController');
+    Route::resource('/my-clients', 'Admin\ClientController');
 });
 
 // Routes for controllers
