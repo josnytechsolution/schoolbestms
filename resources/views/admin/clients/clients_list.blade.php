@@ -65,7 +65,7 @@
                                     @foreach($clients as $client)
                                         <tr>
                                             <td style="vertical-align: middle">{{ $i }}</td>
-                                            <td style="vertical-align: middle">{{ $client->customer_no }}</td>
+                                            <td style="vertical-align: middle">{{ $client->client_no }}</td>
                                             <td style="vertical-align: middle">{{ $client->full_name }}</td>
                                             <td style="vertical-align: middle">{{ $client->contact }}</td>
                                             <td style="vertical-align: middle">{{ $client->email }}</td>

@@ -15,6 +15,7 @@ class Client extends Model
         'contact',
         'on_email',
         'on_phone',
+        'reg_date',
         'company_name',
         'postal_address',
         'county',
@@ -22,6 +23,7 @@ class Client extends Model
         'current_session_id',
         'status',
         'user_id',
+        'logo',
         'created_by',
         'updated_by'
     ];
