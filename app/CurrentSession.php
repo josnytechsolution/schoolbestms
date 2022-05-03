@@ -25,4 +25,14 @@ class CurrentSession extends Model
     {
         return $this->hasMany(AuditTrail::class);
     }
+
+    public function clients()
+    {
+        return $this->hasMany(Client::class);
+    }
+
+    public function projects()
+    {
+        return $this->hasMany(Project::class);
+    }
 }

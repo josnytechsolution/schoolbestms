@@ -27,6 +27,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function(
     Route::resource('/financial-sessions', 'Admin\CurrentSessionController');
     Route::resource('/audit-trails', 'Admin\AuditTrailController');
     Route::resource('/my-clients', 'Admin\ClientController');
+    Route::resource('/schoolbest-packages', 'Admin\PackageController');
+    Route::resource('/schoolbest-projects', 'Admin\ProjectController');
 });
 
 // Routes for controllers

@@ -21,7 +21,7 @@ class Client extends Model
         'county',
         'country',
         'current_session_id',
-        'status',
+        'is_active',
         'user_id',
         'logo',
         'created_by',
@@ -268,8 +268,18 @@ class Client extends Model
         return "{$this->first_name} {$this->last_name}";
     }
 
+    public function current_session()
+    {
+        return $this->belongsTo(CurrentSession::class);
+    }
+
     public function user()
     {
         $this->belongsTo(User::class);
+    }
+
+    public function projects()
+    {
+        return $this->hasMany(Project::class);
     }
 }

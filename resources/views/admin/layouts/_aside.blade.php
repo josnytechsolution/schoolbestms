@@ -40,15 +40,15 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="" class="nav-link">
+                            <a href="{{ route('schoolbest-packages.index') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Schoolbest Packages</p>
+                                <p>Packages</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="" class="nav-link">
+                            <a href="{{ route('schoolbest-projects.index') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Schoolbest Projects</p>
+                                <p>Projects</p>
                             </a>
                         </li>
                     </ul>

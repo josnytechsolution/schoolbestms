@@ -12,7 +12,7 @@
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <div class="content-header">
-            <div class="container-fluid">
+            <div class="container">
                 <div class="row mb-2">
                     <div class="col-sm-6">
                         <h1 class="m-0 text-dark">CREATE CLIENT</h1>
@@ -30,16 +30,16 @@
 
         <!-- Main content -->
         <section class="content">
-            <div class="container-fluid">
+            <div class="container">
                 <!-- Small boxes (Stat box) -->
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="card">
+                        <div class="card card-primary card-outline no-radius">
                             <div class="card-body">
                                 <form action="{{ route('my-clients.store') }}" method="post" enctype="multipart/form-data">
                                     @csrf
-                                    <div class="row">
-                                        <div class="col-md-4 mb-4">
+                                    <div class="row mt-4">
+                                        <div class="col-md-4 mb-5">
                                             <label>First Name <sup class="text-danger">required</sup></label>
                                             <input type="text" name="first_name" class="form-control form-control-border @error('first_name') is-invalid @enderror no-radius" value="{{ old('first_name') }}">
                                             @if($errors->has('first_name'))
@@ -47,7 +47,7 @@
                                             @endif
                                         </div>
 
-                                        <div class="col-md-4 mb-4">
+                                        <div class="col-md-4 mb-5">
                                             <label>Last Name <sup class="text-danger">required</sup></label>
                                             <input type="text" name="last_name" class="form-control form-control-border @error('last_name') is-invalid @enderror no-radius" value="{{ old('last_name') }}">
                                             @if($errors->has('last_name'))
@@ -55,7 +55,7 @@
                                             @endif
                                         </div>
 
-                                        <div class="col-md-4 mb-4">
+                                        <div class="col-md-4 mb-5">
                                             <label>Contact</label>
                                             <input type="text" name="contact" class="form-control form-control-border @error('contact') is-invalid @enderror no-radius" value="{{ old('contact') }}" placeholder="0712345678">
                                             @if($errors->has('contact'))
@@ -63,7 +63,7 @@
                                             @endif
                                         </div>
 
-                                        <div class="col-md-4 mb-4">
+                                        <div class="col-md-4 mb-5">
                                             <label>Email Address</label>
                                             <input type="email" name="email" class="form-control form-control-border @error('email') is-invalid @enderror no-radius" value="{{ old('email') }}">
                                             @if($errors->has('email'))
@@ -71,7 +71,7 @@
                                             @endif
                                         </div>
 
-                                        <div class="col-md-4 mb-4">
+                                        <div class="col-md-4 mb-5">
                                             <label>Date of Registration <sup class="text-danger">required</sup></label>
                                             <input type="date" name="reg_date" class="form-control form-control-border @error('reg_date') is-invalid @enderror no-radius" value="{{ old('reg_date') }}">
                                             @if($errors->has('reg_date'))
@@ -79,7 +79,7 @@
                                             @endif
                                         </div>
 
-                                        <div class="form-group col-md-4 mb-4">
+                                        <div class="form-group col-md-4 mb-5">
                                             <label>Notifications <sup class="text-danger">required</sup></label><br>
                                             <input type="checkbox" name="on_email" value="{{ old('on_email') }}" checked> Via Email
                                             <input type="checkbox" name="on_phone" class="ml-3" value="{{ old('on_phone') }}" checked> Via SMS
@@ -89,7 +89,7 @@
                                             @endif
                                         </div>
 
-                                        <div class="col-md-4 mb-4">
+                                        <div class="col-md-4 mb-5">
                                             <label>Company Name <sup class="text-danger">required</sup></label>
                                             <input type="text" name="company_name" class="form-control form-control-border @error('company_name') is-invalid @enderror no-radius" value="{{ old('company_name') }}">
                                             @if($errors->has('company_name'))
@@ -97,7 +97,7 @@
                                             @endif
                                         </div>
 
-                                        <div class="col-md-4 mb-4">
+                                        <div class="col-md-4 mb-5">
                                             <label>Postal Address <sup class="text-danger">required</sup></label>
                                             <input type="text" name="postal_address" class="form-control form-control-border @error('postal_address') is-invalid @enderror no-radius" value="{{ old('postal_address') }}">
                                             @if($errors->has('postal_address'))
@@ -105,7 +105,7 @@
                                             @endif
                                         </div>
 
-                                        <div class="col-md-4 mb-4">
+                                        <div class="col-md-4 mb-5">
                                             <label>Session/Term <sup class="text-danger">required</sup></label>
                                             <select name="current_session_id" class="form-control form-control-border @error('current_session_id') is-invalid @enderror no-radius">
                                                 <option value="">--Select Option--</option>
@@ -118,10 +118,10 @@
                                             @endif
                                         </div>
 
-                                        <div class="col-md-4 mb-4">
+                                        <div class="col-md-4 mb-5">
                                             <label>County <sup class="text-danger">required</sup></label>
                                             <select name="county" class="form-control form-control-border @error('county') is-invalid @enderror">
-                                                <option value="">--Select Option--</option>
+                                                <option value="">--Select County--</option>
                                                 @include('counties')
                                             </select>
                                             @if($errors->has('county'))
@@ -129,10 +129,10 @@
                                             @endif
                                         </div>
 
-                                        <div class="col-md-4 mb-4">
+                                        <div class="col-md-4 mb-5">
                                             <label>Countries <sup class="text-danger">required</sup></label>
                                             <select name="country" class="form-control form-control-border @error('country') is-invalid @enderror">
-                                                <option value="">--Select Financial Session--</option>
+                                                <option value="">--Select Country--</option>
                                                 @include('countries')
                                             </select>
                                             @if($errors->has('country'))
@@ -140,14 +140,14 @@
                                             @endif
                                         </div>
 
-                                        <div class="col-md-4 mb-4">
+                                        <div class="col-md-4 mb-5">
                                             <label>Company Logo <sup class="text-danger">required</sup></label>
                                             <input type="file" name="logo" accept=".jpg,.jpeg,.png,.tiff" class="form-control form-control-border">
                                             @if($errors->has('logo'))
                                                 <small class="text-danger">{{ $errors->first('logo') }}</small>
                                             @endif
                                         </div>
-                                        <div class="col-12 mt-4">
+                                        <div class="col-12 mt-5">
                                             <button type="submit" class="btn btn-primary btn-flat float-right">
                                                 <i class="fa fa-user-plus"></i> Save Client
                                             </button>

@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use App\Client;
 use App\CurrentSession;
+use App\Package;
+use App\Project;
 use App\User;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
@@ -40,6 +42,14 @@ class RouteServiceProvider extends ServiceProvider
 
         Route::bind('my_client', function ($slug) {
            return Client::where('slug', $slug)->first();
+        });
+
+        Route::bind('schoolbest_package', function ($slug) {
+           return Package::where('slug', $slug)->first();
+        });
+
+        Route::bind('schoolbest_project', function ($slug) {
+           return Project::where('slug', $slug)->first();
         });
     }
 
