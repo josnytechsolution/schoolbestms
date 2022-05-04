@@ -15,12 +15,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0 text-dark">MY CLIENTS</h1>
+                        <h1 class="m-0 text-dark">SCHOOLBEST projectS</h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="{{ route('adminDashboard') }}">Home</a></li>
-                            <li class="breadcrumb-item active">Clients</li>
+                            <li class="breadcrumb-item active">projects</li>
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
@@ -37,10 +37,10 @@
                         <div class="card card-outline card-primary no-radius">
                             <div class="card-header">
                                 <h3 class="card-title">
-                                   <i class="fa fa-user-cog"></i> CLIENTS LIST
+                                   <i class="fa fa-th"></i> SCHOOLBEST PROJECTS LIST
                                 </h3>
                                 <div class="card-tools">
-                                    <a href="{{ route('my-clients.create') }}" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-user-plus"></i> New Client</a>
+                                    <a href="{{ route('schoolbest-projects.create') }}" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-plus"></i> Project</a>
                                 </div>
                             </div>
 
@@ -50,30 +50,32 @@
                                     <tr>
                                         <th>#</th>
                                         <th>ID</th>
-                                        <th>NAME</th>
-                                        <th>CONTACT</th>
-                                        <th>EMAIL ADDRESS</th>
-                                        <th>COMPANY NAME</th>
-                                        <th>POSTAL ADDRESS</th>
-                                        <th>COUNTY/COUNTRY</th>
+                                        <th>PROJECT NAME</th>
+                                        <th>CLIENT NAME</th>
+                                        <th>PACKAGE</th>
+                                        <th>REG. DATE</th>
+                                        <th>BILLING CYCLE</th>
+                                        <th>AMOUNT</th>
+                                        <th>DUE ON</th>
                                         <th>STATUS</th>
                                         <th class="text-center">ACTION</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     <?php $i = 1; ?>
-                                    @foreach($clients as $client)
+                                    @foreach($projects as $project)
                                         <tr>
                                             <td style="vertical-align: middle">{{ $i }}</td>
-                                            <td style="vertical-align: middle">{{ $client->client_no }}</td>
-                                            <td style="vertical-align: middle">{{ $client->full_name }}</td>
-                                            <td style="vertical-align: middle">{{ $client->contact }}</td>
-                                            <td style="vertical-align: middle">{{ $client->email }}</td>
-                                            <td style="vertical-align: middle">{{ $client->company_name }}</td>
-                                            <td style="vertical-align: middle">{{ $client->postal_address }}</td>
-                                            <td style="vertical-align: middle">{{ $client->county." / ".$client->country }}</td>
+                                            <td style="vertical-align: middle">{{ $project->project_no }}</td>
+                                            <td style="vertical-align: middle">{{ $project->name }}</td>
+                                            <td style="vertical-align: middle">{{ $project->client->fullname }}</td>
+                                            <td style="vertical-align: middle">{{ $project->package->name }}</td>
+                                            <td style="vertical-align: middle">{{ $project->reg_date }}</td>
+                                            <td style="vertical-align: middle">{{ strtoupper($project->billing_cycle) }}</td>
+                                            <td style="vertical-align: middle">{{ number_format($project->expected,2) }}</td>
+                                            <td style="vertical-align: middle">{{ $project->next_due_date }}</td>
                                             <td style="vertical-align: middle;text-align: center">
-                                                @if($client->is_active) <button type="button" class="btn btn-flat btn-sm btn-success">Active</button> @else <button type="button" class="btn btn-flat btn-sm btn-danger">InActive</button> @endif
+                                                @if($project->is_active) <button type="button" class="btn btn-flat btn-sm btn-success">Active</button> @else <button type="button" class="btn btn-flat btn-sm btn-danger">InActive</button> @endif
                                             </td>
                                             <td style="vertical-align: middle;text-align: center">
                                                 <div class="input-group-prepend">
@@ -81,30 +83,30 @@
                                                         Action
                                                     </button>
                                                     <div class="dropdown-menu">
-                                                        <a href="{{ route('my-clients.show', $client->slug) }}" class="dropdown-item text-primary">
+                                                        <a href="{{ route('schoolbest-projects.show', $project->slug) }}" class="dropdown-item text-primary">
                                                             <i class="fa fa-eye text-primary"></i> View Details
                                                         </a>
-                                                        <a href="{{ route('my-clients.edit', $client->slug) }}" class="dropdown-item text-success">
-                                                            <i class="fa fa-edit text-success"></i> Edit Client
+                                                        <a href="{{ route('schoolbest-projects.edit', $project->slug) }}" class="dropdown-item text-success">
+                                                            <i class="fa fa-edit text-success"></i> Edit project
                                                         </a>
                                                         <div class="dropdown-divider"></div>
-                                                        <a href="#deleteClient{{ $client->slug }}" data-toggle="modal" class="dropdown-item text-danger">
-                                                            <i class="fa fa-trash text-danger"></i> Delete Client
+                                                        <a href="#deleteProject{{ $project->slug }}" data-toggle="modal" class="dropdown-item text-danger">
+                                                            <i class="fa fa-trash text-danger"></i> Delete project
                                                         </a>
                                                     </div>
                                                 </div>
 
                                                 <!-- Start Delete Modal -->
-                                                <div class="modal fade" id="deleteClient{{ $client->slug }}" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+                                                <div class="modal fade" id="deleteProject{{ $project->slug }}" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
 
                                                     <div class="modal-dialog modal-dialog-centered" role="document">
                                                         <div class="modal-content no-radius">
-                                                            <form action="{{ route('my-clients.destroy', $client->slug) }}" method="post">
+                                                            <form action="{{ route('schoolbest-projects.destroy', $project->slug) }}" method="post">
                                                                 @csrf
                                                                 @method('DELETE')
 
                                                                 <div class="modal-header">
-                                                                    <h5 class="modal-title" id="exampleModalCenterTitle"><i class="fa fa-trash text-danger"></i> <small>{{ strtoupper($client->fullname) }}</small></h5>
+                                                                    <h5 class="modal-title" id="exampleModalCenterTitle"><i class="fa fa-trash text-danger"></i> <small>{{ strtoupper($project->name) }}</small></h5>
                                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                         <span aria-hidden="true">&times;</span>
                                                                     </button>
@@ -115,7 +117,7 @@
                                                                             <i class="fa fa-exclamation-triangle fa-2x"></i><br>
                                                                             This action cannot be undone.<br>
                                                                             This will delete all information related to this this student.<br>
-                                                                            Are you you want to delete<br> {{ strtoupper($client->fullname) }}?
+                                                                            Are you you want to delete<br> {{ strtoupper($project->name) }}?
                                                                         </div>
                                                                     </div>
 
