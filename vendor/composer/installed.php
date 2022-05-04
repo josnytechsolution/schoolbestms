@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => 'f91217c1d15ad594d890b56f37a3e820d4bd4b26',
+        'reference' => '5519f723ba388f8607b81e48c42d014e1168455c',
         'name' => 'laravel/laravel',
         'dev' => true,
     ),
@@ -340,7 +340,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => 'f91217c1d15ad594d890b56f37a3e820d4bd4b26',
+            'reference' => '5519f723ba388f8607b81e48c42d014e1168455c',
             'dev_requirement' => false,
         ),
         'laravel/tinker' => array(
@@ -649,6 +649,15 @@
             'replaced' => array(
                 0 => '3.9.6',
             ),
+        ),
+        'safaricom/mpesa' => array(
+            'pretty_version' => '1.0.8',
+            'version' => '1.0.8.0',
+            'type' => 'package',
+            'install_path' => __DIR__ . '/../safaricom/mpesa',
+            'aliases' => array(),
+            'reference' => 'c66895dcdec8df1f496e017708c557fc252340c5',
+            'dev_requirement' => false,
         ),
         'sebastian/code-unit-reverse-lookup' => array(
             'pretty_version' => '1.0.2',

@@ -56,7 +56,7 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'info@schoolbest.co.ke'),
+        'address' => env('MAIL_FROM_ADDRESS', 'bill@schoolbest.co.ke'),
         'name' => env('MAIL_FROM_NAME', 'SCHOOLBESTMS'),
     ],
 
@@ -84,9 +84,9 @@ return [
     |
     */
 
-    'username' => env('MAIL_USERNAME', 'info@schoolbest.co.ke'),
+    'username' => env('MAIL_USERNAME', 'bill@schoolbest.co.ke'),
 
-    'password' => env('MAIL_PASSWORD', '@0720Josny871499#'),
+    'password' => env('MAIL_PASSWORD', 'Tabitha2016'),
 
     /*
     |--------------------------------------------------------------------------

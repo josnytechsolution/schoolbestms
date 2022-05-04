@@ -16,3 +16,5 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::post('/payment-callback-confirmation-url', 'Api\V1\PaymentTransactionController@processC2BRequestConfirmation');

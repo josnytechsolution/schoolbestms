@@ -42,4 +42,10 @@ class Project extends Model
     {
         return $this->belongsTo(CurrentSession::class);
     }
+
+    public function mpesa_payments()
+    {
+        return $this->hasMany(MpesaPayment::class);
+    }
+
 }

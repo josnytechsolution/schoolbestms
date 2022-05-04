@@ -35,4 +35,9 @@ class CurrentSession extends Model
     {
         return $this->hasMany(Project::class);
     }
+
+    public function mpesa_payments()
+    {
+        return $this->hasMany(MpesaPayment::class);
+    }
 }
