@@ -44,10 +44,8 @@ class PaymentTransactionController extends Controller
         $middleName         = $callbackData->MiddleName;
         $lastName           = $callbackData->LastName;
 
-        $project = Project::where('project_no', $billRefNumber)->first();
+        $project = Project::where('project_no', $billRefNumber)->orWhere('alias', $billRefNumber)->first();
         $current_session = CurrentSession::Current()->first();
-
-        //Ensure to auto-save this project numbers to main app. Include the callback url to this app
 
         if ($project)
         {

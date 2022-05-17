@@ -6,6 +6,8 @@ use App\Client;
 use App\CurrentSession;
 use App\Package;
 use App\Project;
+use App\UpdateMaster;
+use App\User;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -121,6 +123,9 @@ class ProjectController extends Controller
         $data->save();
 
         DB::table('audit_trails')->insert(['user_type' => 'App\User', 'user_id' => Auth::user()->id,  'current_session_id' => $this->CurrentSession(), 'event' => 'created', 'auditable_type' => 'App\Project', 'new_values' => json_encode($data->toArray()), 'url' => URL::full(), 'ip_address' => $_SERVER["REMOTE_ADDR"], 'user_agent' => $_SERVER['HTTP_USER_AGENT']]);
+
+        $projectNo = $data->project_no;
+        UpdateMaster::updateProject($projectNo);
 
         return redirect()->back()->with('success', 'Project added successfully!');
     }

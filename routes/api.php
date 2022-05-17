@@ -18,3 +18,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::post('/payment-callback-confirmation-url', 'Api\V1\PaymentTransactionController@processC2BRequestConfirmation');
+
+//Bulk message delivery report url
+Route::post('/message-callback-confirmation-url', 'Api\V1\MessageCallbackConfirmation@messageCallbackConfirmation');

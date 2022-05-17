@@ -15,7 +15,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0 text-dark">SCHOOLBEST projectS</h1>
+                        <h1 class="m-0 text-dark">SCHOOLBEST PROJECTS</h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
@@ -57,6 +57,7 @@
                                         <th>BILLING CYCLE</th>
                                         <th>AMOUNT</th>
                                         <th>DUE ON</th>
+                                        <th>STUDENTS</th>
                                         <th>STATUS</th>
                                         <th class="text-center">ACTION</th>
                                     </tr>
@@ -74,6 +75,7 @@
                                             <td style="vertical-align: middle">{{ strtoupper($project->billing_cycle) }}</td>
                                             <td style="vertical-align: middle">{{ number_format($project->expected,2) }}</td>
                                             <td style="vertical-align: middle">{{ $project->next_due_date }}</td>
+                                            <td style="vertical-align: middle">405</td>
                                             <td style="vertical-align: middle;text-align: center">
                                                 @if($project->is_active) <button type="button" class="btn btn-flat btn-sm btn-success">Active</button> @else <button type="button" class="btn btn-flat btn-sm btn-danger">InActive</button> @endif
                                             </td>

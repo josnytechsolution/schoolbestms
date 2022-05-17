@@ -33,6 +33,22 @@ class ClientController extends Controller
         return $current_session->id;
     }
 
+    public function getClient(Request $request)
+    {
+        $client = Client::where('code', $request->code)->first();
+        $newData = "";
+
+        if ($client)
+        {
+            $newData .= "<tr><th class='text-right'>".$client->code."</th><th class='text-right'>".$client->email."</th></tr>";
+        }
+        else {
+            $newData = "<h5 class='text-danger'>No Data For This Class Found!</h5>";
+        }
+
+        return $newData;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -44,7 +60,7 @@ class ClientController extends Controller
         $this->authorize('viewAny', Client::class);
 
         $clients = Client::all();
-        return view('admin.clients.clients_list', compact('clients'));
+        return view('admin.clients.clients_scan', compact('clients'));
     }
 
     /**
@@ -70,6 +86,7 @@ class ClientController extends Controller
     public function store(Request $request)
     {
         $this->authorize('create', Client::class);
+
         $request->validate([
             'first_name'  => 'required|string',
             'last_name'   => 'required|string',
@@ -102,7 +119,7 @@ class ClientController extends Controller
 
         $check = Client::orderBy('id', 'desc')->limit(1)->first();
 
-        if ($check) { $cNo = ++$check; } else { $cNo = "SBC1001"; }
+        if ($check) { $cNo = ++$check->client_no; } else { $cNo = "SBC1001"; }
 
         $data = new Client();
         $data->slug     = Str::uuid()->getHex();
