@@ -12,6 +12,7 @@ class CurrentSession extends Model
         'term',
         'year',
         'status',
+        'start_date',
         'created_by',
         'updated_by'
     ];

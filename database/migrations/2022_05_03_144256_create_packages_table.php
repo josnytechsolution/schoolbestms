@@ -21,6 +21,7 @@ class CreatePackagesTable extends Migration
             $table->integer('monthly');
             $table->integer('termly');
             $table->integer('yearly');
+            $table->integer('max_students');
             $table->longText('specification');
             $table->bigInteger('created_by');
             $table->timestamp('created_at')->useCurrent();

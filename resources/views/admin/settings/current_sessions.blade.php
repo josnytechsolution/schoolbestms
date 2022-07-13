@@ -98,6 +98,14 @@
                                                             <small class="text-danger">{{ $errors->first('year') }}</small>
                                                         @endif
                                                     </div>
+                                                    <div class="form-group col-md-12 mt-2">
+                                                        <label>Start Date <sup class="text-danger">required</sup></label>
+                                                        <input type="date" name="start_date" class="form-control form-control-border @error('start_date') is-invalid @enderror no-radius" placeholder="Session Name" value="{{ old('start_date') }}" >
+
+                                                        @if($errors->has('start_date'))
+                                                            <small class="text-danger">{{ $errors->first('start_date') }}</small>
+                                                        @endif
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="modal-footer">
@@ -121,6 +129,7 @@
                                         <th>TERM</th>
                                         <th>YEAR</th>
                                         <th>STATUS</th>
+                                        <th>START DATE</th>
                                         <th>EDIT</th>
                                         <th>DELETE</th>
                                     </tr>
@@ -134,6 +143,7 @@
                                             <td>{{ $financial_session->term }}</td>
                                             <td>{{ $financial_session->year }}</td>
                                             <td>{{ $financial_session->status }}</td>
+                                            <td>{{ date('d-m-Y', strtotime($financial_session->start_date)) }}</td>
                                             <td class="text-center">
                                                 @if($financial_session->status === "Future")
                                                     <a href="#editFSess{{ $financial_session->slug }}" data-toggle="modal">
@@ -210,6 +220,14 @@
                                                                         </select>
                                                                         @if($errors->has('year'))
                                                                             <small class="text-danger">{{ $errors->first('year') }}</small>
+                                                                        @endif
+                                                                    </div>
+                                                                    <div class="form-group col-md-12 mt-2">
+                                                                        <label>Start Date <sup class="text-danger">required</sup></label>
+                                                                        <input type="date" name="start_date" class="form-control form-control-border @error('start_date') is-invalid @enderror no-radius" placeholder="Session Name" value="{{ old('start_date', $financial_session->start_date) }}" >
+
+                                                                        @if($errors->has('start_date'))
+                                                                            <small class="text-danger">{{ $errors->first('start_date') }}</small>
                                                                         @endif
                                                                     </div>
                                                                 </div>

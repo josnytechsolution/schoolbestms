@@ -86,7 +86,7 @@ return [
 
     'username' => env('MAIL_USERNAME', 'bill@schoolbest.co.ke'),
 
-    'password' => env('MAIL_PASSWORD', 'Tabitha2016'),
+    'password' => env('MAIL_PASSWORD', 'Nyutug1t4u'),
 
     /*
     |--------------------------------------------------------------------------

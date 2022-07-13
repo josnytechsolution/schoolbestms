@@ -13,6 +13,7 @@ class Package extends Model
         'monthly',
         'termly',
         'annually',
+        'max_students',
         'specification',
         'created_by',
         'updated_by',

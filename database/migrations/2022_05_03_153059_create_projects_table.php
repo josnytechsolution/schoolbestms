@@ -25,6 +25,8 @@ class CreateProjectsTable extends Migration
             $table->string('project_no')->unique();
             $table->string('name');
             $table->date('reg_date');
+            $table->integer('students')->default(0);
+            $table->integer('max_students')->default(0);
             $table->string('payment_method');
             $table->string('billing_cycle');
             $table->integer('expected');

@@ -103,12 +103,13 @@ class PackageController extends Controller
         $datas = json_encode($myArray);
 
         $data = new Package();
-        $data->slug        = Str::uuid();
+        $data->slug        = Str::uuid()->getHex();
         $data->name        = $request->name;
         $data->description = $request->description;
         $data->monthly     = $request->monthly;
         $data->termly      = $request->termly;
         $data->yearly      = $request->yearly;
+        $data->max_students = $request->students;
         $data->specification = $datas;
         $data->created_by  = Auth::user()->id;
         $data->save();
@@ -205,6 +206,7 @@ class PackageController extends Controller
         $data->monthly     = $request->monthly;
         $data->termly      = $request->termly;
         $data->yearly      = $request->yearly;
+        $data->max_students = $request->students;
         $data->specification = $datas;
         $data->updated_by  = Auth::user()->id;
         $data->save();

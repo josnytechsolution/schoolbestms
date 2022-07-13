@@ -18,8 +18,9 @@ class CreateCurrentSessionsTable extends Migration
             $table->string('slug')->unique();
             $table->string('name')->unique();
             $table->string('term');
-            $table->year('year');
+            $table->year('year')->nullable();
             $table->string('status')->default('Future');
+            $table->date('start_date');
             $table->bigInteger('created_by');
             $table->timestamp('created_at')->useCurrent();
             $table->bigInteger('updated_by')->nullable();

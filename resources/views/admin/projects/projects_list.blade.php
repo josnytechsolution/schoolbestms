@@ -75,7 +75,7 @@
                                             <td style="vertical-align: middle">{{ strtoupper($project->billing_cycle) }}</td>
                                             <td style="vertical-align: middle">{{ number_format($project->expected,2) }}</td>
                                             <td style="vertical-align: middle">{{ $project->next_due_date }}</td>
-                                            <td style="vertical-align: middle">405</td>
+                                            <td style="vertical-align: middle">{{ $project->students }} / {{ $project->max_students }}</td>
                                             <td style="vertical-align: middle;text-align: center">
                                                 @if($project->is_active) <button type="button" class="btn btn-flat btn-sm btn-success">Active</button> @else <button type="button" class="btn btn-flat btn-sm btn-danger">InActive</button> @endif
                                             </td>

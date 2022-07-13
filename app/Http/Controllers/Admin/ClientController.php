@@ -33,22 +33,6 @@ class ClientController extends Controller
         return $current_session->id;
     }
 
-    public function getClient(Request $request)
-    {
-        $client = Client::where('code', $request->code)->first();
-        $newData = "";
-
-        if ($client)
-        {
-            $newData .= "<tr><th class='text-right'>".$client->code."</th><th class='text-right'>".$client->email."</th></tr>";
-        }
-        else {
-            $newData = "<h5 class='text-danger'>No Data For This Class Found!</h5>";
-        }
-
-        return $newData;
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -60,7 +44,7 @@ class ClientController extends Controller
         $this->authorize('viewAny', Client::class);
 
         $clients = Client::all();
-        return view('admin.clients.clients_scan', compact('clients'));
+        return view('admin.clients.clients_list', compact('clients'));
     }
 
     /**

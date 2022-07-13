@@ -68,9 +68,10 @@ class CurrentSessionController extends Controller
         $this->authorize('create', CurrentSession::class);
 
         $request->validate([
-            'name'  => 'required|string|unique:users',
+            'name'  => 'required|string|unique:current_sessions',
             'term'  => 'required|string',
             'year'  => 'required|numeric',
+            'start_date'  => 'required|date',
         ]);
 
         $data = new CurrentSession();
@@ -78,6 +79,7 @@ class CurrentSessionController extends Controller
         $data->name = $request->name;
         $data->term = $request->term;
         $data->year = $request->year;
+        $data->start_date = $request->start_date;
         $data->created_by = Auth::user()->id;
         $data->save();
 
@@ -126,6 +128,7 @@ class CurrentSessionController extends Controller
             'name'  => 'required|string|unique:users,name,'.$currentSession->id,
             'term'  => 'required|string',
             'year'  => 'required|numeric',
+            'start_date'  => 'required|date',
         ]);
 
         $old = json_encode($currentSession->toArray());
@@ -135,6 +138,7 @@ class CurrentSessionController extends Controller
         $data->name         = $request->name;
         $data->term         = $request->term;
         $data->year         = $request->year;
+        $data->start_date = $request->start_date;
         $data->updated_by   = Auth::user()->id;
         $data->save();
 

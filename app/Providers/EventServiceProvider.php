@@ -2,6 +2,10 @@
 
 namespace App\Providers;
 
+use App\Events\NewCustomerPaymentEvent;
+use App\Listeners\SendReceiptViaMailListener;
+use App\Listeners\SendTextNotificationListener;
+use App\Listeners\ValidateCustomerPaymentListener;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -18,6 +22,12 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
+        NewCustomerPaymentEvent::class => [
+           ValidateCustomerPaymentListener::class,
+            SendTextNotificationListener::class,
+            SendReceiptViaMailListener::class,
+        ],
+
     ];
 
     /**

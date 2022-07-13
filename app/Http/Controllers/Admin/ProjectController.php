@@ -85,6 +85,7 @@ class ProjectController extends Controller
         ]);
 
         $package = Package::findOrfail($request->package_id);
+
         if ($request->billing_cycle === "monthly") {
             $expected = $package->monthly;
         } else if ($request->billing_cycle === "termly") {
@@ -112,6 +113,7 @@ class ProjectController extends Controller
         $data->project_no       = $pro_no;
         $data->name             = $request->name;
         $data->reg_date         = $request->reg_date;
+        $data->students         = $request->students;
         $data->payment_method   = $request->payment_method;
         $data->billing_cycle    = $request->billing_cycle;
         $data->expected         = $expected;

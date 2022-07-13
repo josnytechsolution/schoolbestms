@@ -14,6 +14,8 @@ class Project extends Model
         'project_no',
         'name',
         'reg_date',
+        'students',
+        'max_students',
         'payment_method',
         'billing_cycle',
         'expected',
