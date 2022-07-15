@@ -10,6 +10,7 @@ use Illuminate\Notifications\Messages\MailMessage;
 class InvoicePaid extends Notification
 {
     use Queueable;
+
     private $currentSession;
     private $amount;
     private $clientName;
@@ -17,14 +18,26 @@ class InvoicePaid extends Notification
     private $code;
     private $pay_date;
     private $balance;
+    private $invoice;
+    private $receipt;
+    private $name;
 
 
     /**
      * Create a new notification instance.
      *
-     * @return void
+     * @param $currentSession
+     * @param $amount
+     * @param $clientName
+     * @param $company
+     * @param $code
+     * @param $pay_date
+     * @param $balance
+     * @param $invoice
+     * @param $receipt
+     * @param $name
      */
-    public function __construct($currentSession, $amount, $clientName, $company, $code, $pay_date, $balance)
+    public function __construct($currentSession, $amount, $clientName, $company, $code, $pay_date, $balance, $invoice, $receipt, $name)
     {
         $this->currentSession = $currentSession;
         $this->amount = $amount;
@@ -33,6 +46,9 @@ class InvoicePaid extends Notification
         $this->code = $code;
         $this->pay_date = $pay_date;
         $this->balance = $balance;
+        $this->invoice = $invoice;
+        $this->receipt = $receipt;
+        $this->name = $name;
 
     }
 
@@ -55,8 +71,9 @@ class InvoicePaid extends Notification
      */
     public function toMail($notifiable)
     {
-        $url = url('http://dev.schoolbestms/schoolbest-projects/6ad40968fbca439bb950d60892592f57');
+        $url = url('http://dev.schoolbestms/v1/client-payments?receipt='.$this->invoice);
         return (new MailMessage)
+                    ->from('bill@schoolbest.co.ke', 'SCHOOLBEST MS')
                     ->subject('Your Payment Receipt')
                     ->greeting('Dear ' .$this->clientName.' ('.$this->company.')')
                     ->line('This is a payment receipt for SCHOOLBEST MS - '.$this->currentSession)
@@ -66,8 +83,12 @@ class InvoicePaid extends Notification
                     ->line('Reference: ' .$this->code)
                     ->line('Paid On: ' .$this->pay_date)
                     ->line('Your package subscription has been automatically renewed for another academic term.')
-                    //->action('You can view and download your receipt here', $url)
-                    ->line('Thank you for using our services!');
+                    ->action('You can view and download your receipt here', $url)
+                    ->line('Thank you for using our services!')
+                    ->attach(asset($this->receipt), [
+                        'as' => $this->name,
+                        'mime' => 'application/pdf',
+                    ]);
     }
 
     /**

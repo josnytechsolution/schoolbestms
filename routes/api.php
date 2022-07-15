@@ -21,3 +21,5 @@ Route::post('/payment-callback-confirmation-url', 'Api\V1\PaymentTransactionCont
 
 //Bulk message delivery report url
 Route::post('/message-callback-confirmation-url', 'Api\V1\MessageCallbackConfirmation@messageCallbackConfirmation');
+
+Route::get('/client-payments', 'Api\V1\ClientQueryController@queryReceipt');

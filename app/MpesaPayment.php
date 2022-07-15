@@ -34,4 +34,9 @@ class MpesaPayment extends Model
     {
         return $this->belongsTo(CurrentSession::class);
     }
+
+    public function payment()
+    {
+        return $this->hasOne(Payment::class);
+    }
 }

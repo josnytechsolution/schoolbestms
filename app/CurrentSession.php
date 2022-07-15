@@ -41,4 +41,9 @@ class CurrentSession extends Model
     {
         return $this->hasMany(MpesaPayment::class);
     }
+
+    public function payments()
+    {
+        return $this->hasMany(Payment::class);
+    }
 }

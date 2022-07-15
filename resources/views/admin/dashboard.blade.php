@@ -144,6 +144,11 @@
                         </div>
                     </div>
                     <!-- ./col -->
+                    @php($payment = \App\Payment::findOrFail(19))
+
+                    <div class="col-12">
+                        <a href="{{ URL::to(asset($payment->receipt)) }}" class="btn btn-primary">Download</a>
+                    </div>
                 </div>
                 <!-- /.row -->
             </div><!-- /.container-fluid -->

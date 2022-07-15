@@ -23,7 +23,7 @@ class EventServiceProvider extends ServiceProvider
             SendEmailVerificationNotification::class,
         ],
         NewCustomerPaymentEvent::class => [
-           ValidateCustomerPaymentListener::class,
+            ValidateCustomerPaymentListener::class,
             SendTextNotificationListener::class,
             SendReceiptViaMailListener::class,
         ],

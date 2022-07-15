@@ -44,7 +44,7 @@
 {{ $salutation }}
 @else
 @lang('Regards'),<br>
-{{ config('app.name') }}
+{{ __("The SchoolBEST Team") }}
 @endif
 
 {{-- Subcopy --}}
